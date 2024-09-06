@@ -3,7 +3,6 @@ import functions
 import asyncio
 import threading
 
-# Set the appearance mode and theme
 ctk.set_appearance_mode("dark")  # Options: "dark", "light", "system"
 ctk.set_default_color_theme("blue")  # Options: "blue", "green", "dark-blue"
 
@@ -12,17 +11,14 @@ class DiscordAltManagerApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Discord Alt Manager")
-        self.root.geometry("500x300")  # Set a fixed size for the window
+        self.root.geometry("500x300")
 
-        # Frame for holding the options
         self.frame = ctk.CTkFrame(self.root)
         self.frame.pack(pady=20, padx=20, fill="both", expand=True)
 
-        # Initialize label for status messages
         self.label = ctk.CTkLabel(self.frame, text="", text_color="green")
         self.label.pack(pady=10)
 
-        # Initialize OptionMenu (dropdown) for account selection
         self.listbox_label = ctk.CTkLabel(self.frame, text="Select Account:")
         self.listbox_label.pack(pady=5)
 
@@ -30,7 +26,6 @@ class DiscordAltManagerApp:
         self.refresh_optionmenu()
         self.listbox.pack(pady=5)
 
-        # Initialize buttons in a horizontal frame
         self.button_frame = ctk.CTkFrame(self.frame)
         self.button_frame.pack(pady=10, fill="x")
 
@@ -43,7 +38,6 @@ class DiscordAltManagerApp:
         self.remove_button = ctk.CTkButton(self.button_frame, text="Remove", command=self.delete_account)
         self.remove_button.pack(side="left", expand=True, padx=5)
 
-        # Setup asyncio event loop
         self.loop = asyncio.new_event_loop()
         threading.Thread(target=self.start_loop, daemon=True).start()
 
@@ -88,7 +82,6 @@ class DiscordAltManagerApp:
             self.label.configure(text="No account selected to delete.", text_color="red")
 
 
-# Main event loop
 if __name__ == "__main__":
     root = ctk.CTk()
     app = DiscordAltManagerApp(root)
