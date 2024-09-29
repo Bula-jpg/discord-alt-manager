@@ -1,22 +1,20 @@
 import json
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+import undetected_chromedriver as uc
 
 
 async def discord_token_login(token):
     chrome_options = Options()
-    chrome_options.add_experimental_option("detach", True)
     chrome_options.add_argument("--disable-search-engine-choice-screen")
 
-    webdriver_service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
+    # Use undetected_chromedriver for stealthy behavior
+    driver = uc.Chrome(options=chrome_options)
 
+    # Navigate to the Discord login page
     driver.get("https://discord.com/login")
 
+    # Inject the token into localStorage using JavaScript
     script = f"""
         const token = "{token}";
         setInterval(() => {{
